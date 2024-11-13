@@ -19,3 +19,9 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+  .immersion-gradient {
+    @apply bg-gradient-to-r from-custom-purple via-discord-purple to-custom-cyan;
+  }
+}

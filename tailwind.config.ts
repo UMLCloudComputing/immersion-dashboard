@@ -11,6 +11,9 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "custom-cyan": "#59bcc8",
+        "custom-purple": "#783192",
+        "discord-purple": "#7289da",
       },
     },
   },

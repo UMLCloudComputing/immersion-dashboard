@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-ssm": "^3.693.0",
+    "axios": "^1.7.9",
     "next": "15.0.2",
     "next-auth": "^5.0.0-beta.25",
     "react": "19.0.0-rc-02c0e824-20241028",

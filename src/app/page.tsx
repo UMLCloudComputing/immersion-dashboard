@@ -1,28 +1,45 @@
-"use client"
+// "use client"
 import Image from "next/image"
 import { DMSans } from "../fonts"
 import NextLink from "next/link"
-import { useSession } from "next-auth/react"
+// import { useSession } from "next-auth/react"
+// import { redirect } from "next/navigation"
+import { signIn } from "@/auth"
 export default function HomePage() {
-  const session = useSession()
+  // const session = useSession()
+
+  // const signIn = () => {
+  //   redirect("https://discord.com/oauth2/authorize?client_id=1318737559760928799&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fcallback&scope=identify+guilds")
+  // }
+
 
   return (
     <div className="flex flex-row">
       {/* Navbar*/}
-      <div className="bg-black min-h-screen min-w-1/6 immersion-gradient flex flex-col">
+      <div className="min-h-screen min-w-1/6 immersion-gradient flex flex-col">
         <NextLink href="/home">
           <Image src="/immersion_logo.svg" alt="Immersion Logo" width={48} height={48} />
         </NextLink>
         <div>
-          {
+          {/* {
             session.data ? "Signed in" : "Not signed in"
-          }
+          } */}
         </div>
+        <div className="bg-black">
+
+        </div>
+
 
 
 
       </div>
       {/* Everything else (for now)*/}
+      <form action={async () => {
+        "use server"
+        await signIn("discord")
+      }}>
+        <button className="bg-green">Sign in</button>
+      </form>
 
       {/* Panels layout container*/}
       <div className="flex flex-row justify-around mt-20 min-h-5/6 w-full">

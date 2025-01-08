@@ -1,4 +1,4 @@
-export default function Test() {
+export default function TestHome() {
     return (
         <div className="w-[1920px] h-[1080px] relative bg-[#eeeeee]">
             <div className="w-[100px] h-[142px] left-[1761.58px] top-[-162.22px] absolute origin-top-left rotate-[4.15deg]" />

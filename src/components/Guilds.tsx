@@ -1,26 +1,21 @@
+"use client"
 import { Guild } from "@/types/types"
-import Image from "next/image"
+import { GuildIcon } from "./GuildIcon"
+import { useRouter } from "next/navigation"
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const Guilds = ({ data }: { data: Guild[] }) => {
-
+    const router = useRouter()
     const ownedGuilds = data.filter((guild: Guild) => BigInt(guild.permissions) & BigInt("0x8"))
+    const nextStep = (guild: Guild) => {
+        console.log(guild)
+        router.replace(`/onboarding/org-lookup?guild=${guild.id}`)
+    }
     return (
-        <div className="grid grid-cols-6 gap-0.5 gap-y-4 bg-white justify-evenly items-center">
-            {ownedGuilds.map((guild: Guild) => (
-                <div key={guild.id} className="flex flex-col justify-center items-center">
-                    <div className="justify-center items-center flex w-32 h-32 overflow-hidden rounded-full bg-white border-black border-4">
-                        {
-                            guild.icon == null ? (
-                                <Image src={"/discord_logo.svg"} alt="Guild Icon" width={512} height={512} objectFit="cover" />
-                            ) : (
-                                <Image src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`} alt="Guild Icon" width={512} height={512} />
-                            )
 
-                        }
-                    </div>
-                    <h3 className="text-black">{guild.name}</h3>
-                </div>
+        <div className="flex flex-row flex-wrap gap-1 gap-y-4 justify-center items-begin w-1/2 bg-neutral-600 p-4 rounded-3xl">
+            {ownedGuilds.map((guild: Guild) => (
+                <GuildIcon key={guild.id} guild={guild} onClick={nextStep} />
             ))}
         </div>
     )

@@ -13,6 +13,7 @@ const config: Config = {
         foreground: "var(--foreground)",
         "custom-cyan": "#59bcc8",
         "custom-purple": "#783192",
+        "custom-mid": "#768bf3",
         "discord-purple": "#7289da",
       },
     },

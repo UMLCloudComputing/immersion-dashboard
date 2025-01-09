@@ -1,49 +1,26 @@
-// "use client"
+"use client"
 import Image from "next/image"
 import { DMSans } from "../fonts"
 import NextLink from "next/link"
 // import { useSession } from "next-auth/react"
 // import { redirect } from "next/navigation"
-import { signIn, auth } from "@/auth"
-import { redirect } from "next/navigation"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
 // import { auth } from "next-auth/react"
-export default async function HomePage() {
-  const session = await auth()
-  console.log(session)
+export default function HomePage() {
+
+  const router = useRouter()
 
   const beginOnboarding = () => {
-    redirect("/onboarding/choose-server")
+    router.replace("/onboarding/choose-server")
   }
 
 
 
   return (
-    <div className="flex flex-row">
-      {/* Navbar*/}
-      <div className="min-h-screen min-w-1/6 immersion-gradient flex flex-col">
-        <NextLink href="/home">
-          <Image src="/immersion_logo.svg" alt="Immersion Logo" width={48} height={48} />
-        </NextLink>
-        <div>
-          {/* {
-            session.data ? "Signed in" : "Not signed in"
-          } */}
-        </div>
-        <div className="bg-black">
-
-        </div>
-
-
-
-
-      </div>
+    <div className="flex flex-row bg-neutral-400 w-screen h-screen">
       {/* Everything else (for now)*/}
-      <form action={async () => {
-        "use server"
-        await signIn("discord")
-      }}>
-        <button className="bg-green">Sign in</button>
-      </form>
+
 
       {/* Panels layout container*/}
       <div className="flex flex-row justify-around mt-20 min-h-5/6 w-full">
@@ -62,7 +39,7 @@ export default async function HomePage() {
         <div className="flex flex-col place-content-center w-96 mt-20 h-1/2 gap-5">
           <div className="flex justify-center">
             <button
-              className={`bg-blue-400 transition-all duration-75 ease-out hover-ease-in hover:bg-blue-600 w-80 h-20 rounded-lg ${DMSans.className} text-3xl text-white font-bold`} onClick={beginOnboarding()}>Sign up now</button>
+              className={`bg-blue-400 transition-all duration-75 ease-out hover-ease-in hover:bg-blue-600 w-80 h-20 rounded-lg ${DMSans.className} text-3xl text-white font-bold`} onClick={() => beginOnboarding()}>Sign up now</button>
           </div>
           <div className={` ${DMSans.className} text-xl text-center`}>
             or

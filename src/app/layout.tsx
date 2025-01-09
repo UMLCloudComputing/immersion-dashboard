@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SessionProvider from "@/components/SessionProvider";
+import { NavBar } from "@/components/NavBar";
+import { Provider } from "@/components/ui/provider"
 
 export const metadata: Metadata = {
   title: "Immersion",
@@ -16,10 +18,14 @@ export default function RootLayout({
     <html lang="en">
       <link rel="icon" href="immersion.svg" type="img/svg+xml"></link>
       <body>
-        <SessionProvider>
-          {children}
-        </SessionProvider>
+        <Provider>
+          <SessionProvider>
+            <NavBar />
+            {children}
+          </SessionProvider>
+        </Provider>
       </body>
+
     </html >
   );
 }

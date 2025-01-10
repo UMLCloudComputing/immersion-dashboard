@@ -10,3 +10,9 @@ export interface Guild {
     approximate_presence_count: number
 
 }
+
+export interface Org {
+    id: string,
+    name: string,
+    icon: string
+}

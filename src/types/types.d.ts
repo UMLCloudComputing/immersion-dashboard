@@ -14,5 +14,6 @@ export interface Guild {
 export interface Org {
     id: string,
     name: string,
-    icon: string
+    icon: string,
+    primaryContact: string
 }

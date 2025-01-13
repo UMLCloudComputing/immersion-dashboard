@@ -8,7 +8,6 @@ export const Guilds = ({ data }: { data: Guild[] }) => {
     const router = useRouter()
     const ownedGuilds = data.filter((guild: Guild) => BigInt(guild.permissions) & BigInt("0x8")) //filter out guilds where user isnt admin
     const nextStep = (guild: Guild) => {
-        console.log(guild)
         router.replace(`/onboarding/org-lookup?guild=${guild.id}`)
     }
     return (

@@ -3,6 +3,7 @@ import "./globals.css";
 import SessionProvider from "@/components/SessionProvider";
 import { NavBar } from "@/components/NavBar";
 import { Provider } from "@/components/ui/provider"
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Immersion",
@@ -21,7 +22,9 @@ export default function RootLayout({
         <Provider>
           <SessionProvider>
             <NavBar />
-            {children}
+            <Suspense fallback={<div>Loading...</div>}>
+              {children}
+            </Suspense>
           </SessionProvider>
         </Provider>
       </body>

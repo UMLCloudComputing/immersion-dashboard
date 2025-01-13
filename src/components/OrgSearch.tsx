@@ -5,7 +5,9 @@ import { Input } from "@chakra-ui/react"
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 
-export const OrgSearch = ({ orgs }: { orgs: Org[] }) => {
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const OrgSearch = ({ orgs, setOrg }: { orgs: Org[], setOrg: any }) => {
 
     const [input, setInput] = useState("");
     const [suggestions, setSuggestions] = useState<Org[]>([]);
@@ -15,20 +17,20 @@ export const OrgSearch = ({ orgs }: { orgs: Org[] }) => {
         setInput(query);
 
         // Filter the suggestions based on the input query
-        if (query.length > 3) {
+        if (query.length >= 3) {
             const filteredSuggestions = orgs.filter((org) =>
                 org.name.toLowerCase().startsWith(query.toLowerCase())
             );
-            console.log("new suggestions", filteredSuggestions);
             setSuggestions(filteredSuggestions);
         } else {
             setSuggestions([]); // If the query is empty, don't show any suggestions
         }
     };
 
-    const handleSuggestionClick = (suggestion: string) => {
-        setInput(suggestion); // Set input to the clicked suggestion
+    const handleSuggestionClick = (suggestion: Org) => {
+        setInput(suggestion.name); // Set input to the clicked suggestion
         setSuggestions([]); // Clear suggestions
+        setOrg(suggestion)
     };
     return (
         <div className="flex flex-row flex-wrap gap-1 gap-y-4 justify-center items-begin w-1/2 bg-neutral-600 p-4 rounded-3xl">
@@ -37,7 +39,7 @@ export const OrgSearch = ({ orgs }: { orgs: Org[] }) => {
             {suggestions.length > 0 && (
                 <div className="flex flex-col gap-1 justify-begin w-full">
                     {suggestions.map((suggestion, index) => (
-                        <button className="hover:bg-neutral-500 rounded-3xl flex flex-row items-center p-2" onClick={() => handleSuggestionClick(suggestion.name)} key={index} >
+                        <button className="hover:bg-neutral-500 rounded-3xl flex flex-row items-center p-2" onClick={() => handleSuggestionClick(suggestion)} key={index} >
                             <Image className="overflow-hidden rounded-full mr-5 border-2 border-neutral-300" src={suggestion.icon} alt="Org Icon" width={32} height={32} />
                             <div className={`${DMSans.className} text-neutral-300`}>{suggestion.name}</div>
                         </button>

@@ -27,7 +27,6 @@ export default async function ChooseServerPage() {
         return guilds.json()
     }
 
-    console.log(await getUserGuilds())
 
 
     return (

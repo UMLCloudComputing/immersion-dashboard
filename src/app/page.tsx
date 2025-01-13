@@ -1,10 +1,10 @@
 "use client"
-import Image from "next/image"
+
 import { DMSans } from "../fonts"
-import NextLink from "next/link"
+
 // import { useSession } from "next-auth/react"
-// import { redirect } from "next/navigation"
-import { signIn } from "next-auth/react"
+// import { redirect } froms "next/navigation"
+
 import { useRouter } from "next/navigation"
 // import { auth } from "next-auth/react"
 export default function HomePage() {
@@ -14,9 +14,6 @@ export default function HomePage() {
   const beginOnboarding = () => {
     router.replace("/onboarding/choose-server")
   }
-
-
-
   return (
     <div className="flex flex-row bg-neutral-400 w-screen h-screen">
       {/* Everything else (for now)*/}
@@ -39,13 +36,13 @@ export default function HomePage() {
         <div className="flex flex-col place-content-center w-96 mt-20 h-1/2 gap-5">
           <div className="flex justify-center">
             <button
-              className={`bg-blue-400 transition-all duration-75 ease-out hover-ease-in hover:bg-blue-600 w-80 h-20 rounded-lg ${DMSans.className} text-3xl text-white font-bold`} onClick={() => beginOnboarding()}>Sign up now</button>
+              className={`bg-custom-cyan transition-all duration-75 ease-out hover-ease-in hover:bg-blue-600 w-80 h-20 rounded-lg ${DMSans.className} text-3xl text-white font-bold`} onClick={beginOnboarding}>Sign up now</button>
           </div>
           <div className={` ${DMSans.className} text-xl text-center`}>
             or
           </div>
           <div className="flex justify-center">
-            <button className={`bg-blue-400 transition-all duration-75 ease-out hover:ease-in hover:bg-blue-600 w-80 h-20 rounded-lg ${DMSans.className} text-3xl text-white font-bold`}>Go to dashboard</button>
+            <button className={`bg-custom-cyan transition-all duration-75 ease-out hover:ease-in hover:bg-blue-600 w-80 h-20 rounded-lg ${DMSans.className} text-3xl text-white font-bold`}>Go to dashboard</button>
           </div>
         </div>
       </div>

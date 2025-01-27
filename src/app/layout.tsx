@@ -4,6 +4,7 @@ import SessionProvider from "@/components/SessionProvider";
 import { NavBar } from "@/components/NavBar";
 import { Provider } from "@/components/ui/provider"
 import { Suspense } from "react";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Immersion",
@@ -16,15 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <link rel="icon" href="immersion.svg" type="img/svg+xml"></link>
       <body>
         <Provider>
           <SessionProvider>
             <NavBar />
-            <Suspense fallback={<div>Loading...</div>}>
-              {children}
-            </Suspense>
+            {children}
+            <Toaster />
           </SessionProvider>
         </Provider>
       </body>

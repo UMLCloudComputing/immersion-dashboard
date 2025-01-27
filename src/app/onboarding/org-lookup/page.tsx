@@ -11,7 +11,6 @@ export default function OrgLookupPage() {
     const router = useRouter()
 
     const [selectedOrg, setSelectedOrg] = useState<Org | null>(null)
-    console.log(selectedOrg)
 
     const verifyGuildId = () => {
         const guildId = searchParams.get("guild")

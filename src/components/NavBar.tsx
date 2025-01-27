@@ -1,6 +1,6 @@
 "use client"
 import { Avatar, AvatarGroup } from "./ui/avatar"
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import NextLink from "next/link"
 import Image from "next/image"
 import { useState } from "react";
@@ -18,7 +18,7 @@ export const NavBar = () => {
         <div className="w-screen h-12 bg-neutral-600 flex justify-between items-center">
 
             <NextLink href="/">
-                <Image src={"/immersion.svg"} alt="Immersion Logo" width={50} height={50} className="m-2 p-1 hover:bg-neutral-500 rounded-lg transition-all ease-out hover:ease-in duration-10" />
+                <Image src={"/immersion_isolated_gray.svg"} alt="Immersion Logo" width={50} height={50} className="m-2 p-1 hover:bg-neutral-500 rounded-lg transition-all ease-out hover:ease-in duration-10" />
             </NextLink>
             {
                 session ? (
@@ -37,9 +37,8 @@ export const NavBar = () => {
                         </MenuContent>
                     </MenuRoot >
                 ) : (
-                    <NextLink href="/api/auth/signin">
-                        <div className="m-2 p-1 hover:bg-neutral-500 rounded-lg transition-all ease-out hover:ease-in duration-10">Sign in</div>
-                    </NextLink>
+                    <button className="m-2 p-1 hover:bg-neutral-500 rounded-lg transition-all ease-out hover:ease-in duration-10" onClick={() => signIn("discord")}>Sign in</button>
+
                 )}
 
         </div >

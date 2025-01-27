@@ -1,5 +1,6 @@
 "use client"
 
+import { Alert } from "@chakra-ui/react"
 import { DMSans } from "../fonts"
 
 // import { useSession } from "next-auth/react"
@@ -47,5 +48,6 @@ export default function HomePage() {
         </div>
       </div>
     </div>
+
   )
 }

@@ -17,3 +17,9 @@ export interface Org {
     icon: string,
     primaryContact: string
 }
+
+export interface VerificationEmailActionResponse {
+    status: "success" | "error" | "idle",
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    message: any
+}

@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.734.0",
     "@aws-sdk/client-ses": "^3.734.0",
     "@aws-sdk/client-ssm": "^3.693.0",
+    "@aws-sdk/lib-dynamodb": "^3.734.0",
     "@chakra-ui/react": "^3.2.5",
     "@emotion/react": "^11.14.0",
     "aws-sdk": "^2.1692.0",

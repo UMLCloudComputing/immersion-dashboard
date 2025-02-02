@@ -15,11 +15,21 @@ export interface Org {
     id: string,
     name: string,
     icon: string,
-    primaryContact: string
+    primaryContactEmail: string
 }
 
 export interface VerificationEmailActionResponse {
     status: "success" | "error" | "idle",
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     message: any
+}
+
+export interface GradientDivProps {
+    children: ReactNode
+    className: string
+}
+
+declare global {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    interface Window { scrollTimeout: any }
 }

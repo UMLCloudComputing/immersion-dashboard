@@ -15,15 +15,29 @@ export const Guilds = () => {
     }
 
     useEffect(() => {
+        const abortController = new AbortController()
         const getGuilds = async () => {
-            const res = await fetch("/api/guilds");
-            const guilds = await res.json();
-            const ownedGuilds = guilds.filter((guild: Guild) => BigInt(guild.permissions) & BigInt("0x8")) //filter out guilds where user isnt admin
-            setGuilds(ownedGuilds)
-            setLoading(false)
+            try {
+                const res = await fetch("/api/guilds", {
+                    signal: abortController.signal
+                });
+                const data = await res.json();
+                if (data) {
+                    const ownedGuilds = data.filter((guild: Guild) => BigInt(guild.permissions) & BigInt("0x8")) //filter out guilds where user isnt admin
+                    setGuilds(ownedGuilds)
+                    setLoading(false)
+                }
+            } catch (error) {
+                if (error.name === "AbortError") {
+                    console.log("Request Cancelled")
+                }
+            }
         }
 
         getGuilds()
+        return () => {
+            abortController.abort()
+        }
     }, [])
 
     return (

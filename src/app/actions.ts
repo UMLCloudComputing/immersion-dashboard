@@ -1,7 +1,8 @@
 "use server"
 import { VerificationEmailActionResponse } from "@/types/types"
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
 import { SendEmailCommand, SESClient } from "@aws-sdk/client-ses"
-
+import { PutCommand } from "@aws-sdk/lib-dynamodb"
 
 
 const createVerificationEmail = (to: string, from: string, code: number) => {
@@ -29,11 +30,28 @@ const createVerificationEmail = (to: string, from: string, code: number) => {
     })
 }
 
+const createDynamoDBEntry = (emailAddress: string, code: number) => {
+    const expireAt = Math.floor((new Date().getTime() + 30000) / 1000) //expire in 30 seconds
+    return new PutCommand({
+        TableName: "immersion-verification",
+        Item: {
+            "email": emailAddress,
+            "code": code,
+            "expiration": expireAt.toString()
+        },
+    })
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const sendVerificationEmail = async (): Promise<VerificationEmailActionResponse> => {
+export const sendVerificationEmail = async (emailAddress: string): Promise<VerificationEmailActionResponse> => {
     const sesClient = new SESClient({ region: "us-east-1" })
-    const code = 123456
-    // const verificationEmail = createVerificationEmail("nbottari9@gmail.com", "no-reply@umlcloudcomputing.org", code);
+    const randomSixDigitCode = Math.floor(Math.random() * 900000) + 100000;
+    const ddbClient = new DynamoDBClient({ region: "us-east-1" })
+
+    const ddbDocument = createDynamoDBEntry("nbottari9@gmail.com", randomSixDigitCode)
+    await ddbClient.send(ddbDocument)
+
+    // const verificationEmail = createVerificationEmail("myhorsefly12345@gmail.com", "no-reply@umlcloudcomputing.org", code);
     // try {
     //     await sesClient.send(verificationEmail)
 

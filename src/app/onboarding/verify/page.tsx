@@ -20,11 +20,6 @@ export default function VerificationPage() {
     const [acknowledged, setAcknowledged] = useState(false)
     const [formStage, setFormStage] = useState(0)
 
-    const initialState: VerificationEmailActionResponse = {
-        status: "idle",
-        message: ""
-    }
-    const [state, formAction, pending] = useActionState(sendVerificationEmail, initialState)
     //vars
     const guildId = searchParams.get("guild")
     const orgId = searchParams.get("org")
@@ -36,7 +31,8 @@ export default function VerificationPage() {
         // sendVerificationEmail();
         //router.replace("/onboarding/confirm")
         setFormStage(1)
-        toaster.promise(sendVerificationEmail(), {
+        // console.log("org: ", org)
+        toaster.promise(sendVerificationEmail(org.primaryContactEmail), {
             success: {
                 title: "Verification Email Sent",
                 description: "Check your inbox for a verification code",
@@ -100,7 +96,8 @@ export default function VerificationPage() {
                     <h1 className={`text-5xl text-center text-neutral-300 p-5 ${DMSans.className}`}>Check your inbox!</h1>
                     <h3 className={`text-3xl text-center text-neutral-300 ${DMSans.className}`}>We sent you a code. It will expire in 2 minutes</h3>
                     <PinInput count={6} size="2xl" className={`mt-20 p-5 bg-neutral-600 rounded-2xl ${DMSans.className}`} variant="flushed" otp />
-                    <button className={`bg-neutral-600 m-20 p-4 transition-all ease-out hover:ease-in hover:bg-neutral-500 duration-10 text-neutral-200 ${DMSans.className} text-2xl rounded-2xl`} onClick={() => confirmVerificationCode()}>Confirm</button>
+                    <button className={`bg-neutral-600 m-20 p-4 transition-all ease-out hover:ease-in hover:bg-neutral-500 duration-10 
+                        text-neutral-200 ${DMSans.className} text-2xl rounded-2xl`} onClick={() => confirmVerificationCode()}>Confirm</button>
                 </>
             ) : (
 
@@ -115,7 +112,7 @@ export default function VerificationPage() {
                     </Suspense>
                     <h3 className={`text-2xl text-center text-red-500 pt-10 pb-3 ${DMSans.className}`}>
                         Check this box to confirm you have access to the email <span className="font-bold text-neutral-200">
-                            {org?.primaryContact}
+                            {org?.primaryContactEmail}
                         </span>
                     </h3>
                     <Checkbox variant={"subtle"} size="lg"

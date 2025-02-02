@@ -14,7 +14,8 @@ const config: Config = {
         "custom-cyan": "#59bcc8",
         "custom-purple": "#783192",
         "custom-mid": "#768bf3",
-        "discord-purple": "#7289da",
+        "discord-purple": "#5865f2",
+        "engage-green": "#3ab549"
       },
     },
   },

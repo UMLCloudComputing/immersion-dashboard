@@ -29,7 +29,7 @@ export const NavBar = () => {
     return (
         <header className={`${!topOfPage && "shadow-2xl shadow-neutral-500"} transition-all duration-100 w-full h-12 bg-neutral-300 fixed top-0 z-50`}>
             <div className="flex justify-between items-center w-full h-full">
-                <NextLink href="/" className="flex flex-row items-center shadow-none hover:shadow-xl hover:shadow-neutral-500 rounded-lg transition-all ease-out hover:ease-in duration-10 m-2 p-1">
+                <NextLink href="/" className="flex flex-row items-center shadow-none hover:shadow-sm hover:shadow-neutral-500 rounded-lg transition-all ease-out hover:ease-in duration-10 m-2 p-1">
                     <Image src={"/immersion_logo_g.svg"} alt="Immersion Logo" width={50} height={50} className="p-1 hover:animate-spin-once" />
                     <h1 className={`${DMSans.className} text-neutral-500 text-2xl font-bold ml-2`}>Immersion</h1>
                 </NextLink>

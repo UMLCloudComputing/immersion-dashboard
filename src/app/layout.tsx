@@ -19,12 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <link rel="icon" href="immersion_logo_g.svg" type="img/svg+xml"></link>
-      <body>
+      <body className="bg-neutral-300">
         <Provider>
           <SessionProvider>
             <NavBar />
 
-            <div className="min-h-[calc(100vh-3rem)] pt-12">
+            <div className="min-h-[calc(100vh-3rem)] pt-12 bg-neutral-300">
               {children}
             </div>
 

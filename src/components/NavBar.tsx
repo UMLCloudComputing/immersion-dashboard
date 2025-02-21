@@ -14,7 +14,7 @@ export const NavBar = () => {
     const { data: session } = useSession();
     const [open, setOpen] = useState(false)
 
-    const [topOfPage, setTopOfPage] = useState(false);
+    const [topOfPage, setTopOfPage] = useState(true);
 
     const handleScroll = () => {
         setTopOfPage(window.scrollY === 0);
@@ -27,7 +27,7 @@ export const NavBar = () => {
 
 
     return (
-        <header className={`${!topOfPage && "shadow-2xl shadow-neutral-500"} transition-all duration-100 w-full h-12 bg-neutral-300 fixed top-0 z-50`}>
+        <header className={`${!topOfPage && "shadow-2xl shadow-neutral-500"} ${topOfPage && "shadow-none"} transition-all duration-100 w-full h-12 bg-neutral-300 fixed top-0`}>
             <div className="flex justify-between items-center w-full h-full">
                 <NextLink href="/" className="flex flex-row items-center shadow-none hover:shadow-sm hover:shadow-neutral-500 rounded-lg transition-all ease-out hover:ease-in duration-10 m-2 p-1">
                     <Image src={"/immersion_logo_g.svg"} alt="Immersion Logo" width={50} height={50} className="p-1 hover:animate-spin-once" />
@@ -53,7 +53,7 @@ export const NavBar = () => {
                             </MenuContent>
                         </MenuRoot >
                     ) : (
-                        <button className="m-2 p-1 hover:bg-neutral-500 rounded-lg transition-all ease-out hover:ease-in duration-10" onClick={() => signIn("discord")}>Sign in</button>
+                        <button className={`immersion-gradient transition-all duration-500 ease-out hover-ease-in hover:shadow-xl hover:shadow-blue-400 shadow-none rounded-lg ${DMSans.className} text-xl text-white font-bold hover:opacity-80`} onClick={() => signIn("discord")}>Sign in</button>
 
                     )}
             </div>

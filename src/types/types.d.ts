@@ -1,3 +1,5 @@
+import { Response } from "next/server";
+
 export interface Guild {
     id: string
     name: string,
@@ -24,9 +26,8 @@ export interface VerificationEmailActionResponse {
     message: any
 }
 
-export interface GradientDivProps {
-    children: ReactNode
-    className: string
+export interface FetchError {
+    message: string;
 }
 
 declare global {

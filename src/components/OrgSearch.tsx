@@ -4,10 +4,11 @@ import { Org } from "@/types/types";
 import { Input } from "@chakra-ui/react"
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
+import { OrgSearchProps } from "@/types/props";
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const OrgSearch = ({ orgs, setOrg }: { orgs: Org[], setOrg: any }) => {
+export const OrgSearch = ({ props }: { props: OrgSearchProps }) => {
 
     const [input, setInput] = useState("");
     const [suggestions, setSuggestions] = useState<Org[]>([]);
@@ -18,7 +19,7 @@ export const OrgSearch = ({ orgs, setOrg }: { orgs: Org[], setOrg: any }) => {
 
         // Filter the suggestions based on the input query
         if (query.length >= 3) {
-            const filteredSuggestions = orgs.filter((org) =>
+            const filteredSuggestions = props.orgs.filter((org) =>
                 org.name.toLowerCase().startsWith(query.toLowerCase())
             );
             setSuggestions(filteredSuggestions);
@@ -30,7 +31,7 @@ export const OrgSearch = ({ orgs, setOrg }: { orgs: Org[], setOrg: any }) => {
     const handleSuggestionClick = (suggestion: Org) => {
         setInput(suggestion.name); // Set input to the clicked suggestion
         setSuggestions([]); // Clear suggestions
-        setOrg(suggestion)
+        props.setOrg(suggestion)
     };
     return (
         <div className="flex flex-row flex-wrap gap-1 gap-y-4 justify-center items-begin w-1/2 bg-neutral-600 p-4 rounded-3xl">

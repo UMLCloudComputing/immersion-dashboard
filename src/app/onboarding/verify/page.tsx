@@ -32,7 +32,9 @@ export default function VerificationPage() {
         //router.replace("/onboarding/confirm")
         setFormStage(1)
         // console.log("org: ", org)
-        toaster.promise(sendVerificationEmail(org.primaryContactEmail), {
+        const res = sendVerificationEmail(org.primaryContactEmail)
+        console.log(res)
+        toaster.promise(res, {
             success: {
                 title: "Verification Email Sent",
                 description: "Check your inbox for a verification code",
@@ -54,10 +56,10 @@ export default function VerificationPage() {
         const verifyQueryParams = () => {
             if (!guildId) {
                 console.error("No guild id provided")
-                router.replace("/choose-server") //redirect to choose-server
+                router.push("/choose-server") //redirect to choose-server
             } else if (!orgId) {
                 console.error("No org id provided")
-                router.replace(`/org-lookup?guild=${guildId}`) //redirect to org-lookup
+                router.push(`/org-lookup?guild=${guildId}`) //redirect to org-lookup
             }
         }
 
@@ -87,7 +89,7 @@ export default function VerificationPage() {
     }, [orgId])
 
     return (
-        <div className="w-screen h-screen flex flex-col immersion-gradient justify-begin items-center gap-0">
+        <div className="flex flex-col justify-begin items-center gap-0">
 
 
 

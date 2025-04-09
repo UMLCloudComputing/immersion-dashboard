@@ -49,7 +49,7 @@ export const sendVerificationEmail = async (emailAddress: string): Promise<Verif
     const ddbClient = new DynamoDBClient({ region: "us-east-1" })
 
     const ddbDocument = createDynamoDBEntry("nbottari9@gmail.com", randomSixDigitCode)
-    await ddbClient.send(ddbDocument)
+    //await ddbClient.send(ddbDocument)
 
     // const verificationEmail = createVerificationEmail("myhorsefly12345@gmail.com", "no-reply@umlcloudcomputing.org", code);
     // try {
@@ -72,7 +72,7 @@ export const sendVerificationEmail = async (emailAddress: string): Promise<Verif
                 status: "success",
                 message: "Email sent"
             })
-        }, 2000)
+        }, 5000)
     }
     )
 

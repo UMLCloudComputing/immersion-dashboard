@@ -1,4 +1,4 @@
-import { GradientDivProps } from "@/types/types";
+import { GradientDivProps } from "@/types/props";
 import { useEffect, useState } from "react";
 
 
@@ -23,11 +23,9 @@ const GradientPosition = () => {
 export const GradientDiv: React.FC<GradientDivProps> = ({ children, className }) => {
     return (
         <div
-
             style={{
                 backgroundImage: `radial-gradient( circle at ${GradientPosition().x}px ${GradientPosition().y}px, red  , blue 50% )`
             }}
-
             className={className}>
             {children}
         </div>

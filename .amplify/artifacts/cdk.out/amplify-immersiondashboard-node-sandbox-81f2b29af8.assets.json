@@ -1,7 +1,7 @@
 {
-  "version": "39.0.0",
+  "version": "40.0.0",
   "files": {
-    "b34fa736575f78473895af22629145713b210cadf7123fef89b5e084794fc051": {
+    "8fdefaefd469ff7228881a634bab423413c2ae72b9860b7a44a27877839ffabf": {
       "source": {
         "path": "amplify-immersiondashboard-node-sandbox-81f2b29af8.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "b34fa736575f78473895af22629145713b210cadf7123fef89b5e084794fc051.json",
+          "objectKey": "8fdefaefd469ff7228881a634bab423413c2ae72b9860b7a44a27877839ffabf.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

@@ -4,5 +4,8 @@
     "postCreateCommand": "npm install",
     "forwardPorts": [
         8080
-    ]
+    ],
+    "features": {
+        "aws-cli": "latest"
+    }
 }

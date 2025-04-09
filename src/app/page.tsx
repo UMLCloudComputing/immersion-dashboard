@@ -8,7 +8,7 @@ export default function HomePage() {
   const router = useRouter()
 
   const beginOnboarding = () => {
-    router.replace("/onboarding/choose-server")
+    router.push("/onboarding/choose-server")
   }
 
   const dashboard = () => {
@@ -16,6 +16,7 @@ export default function HomePage() {
   }
 
   return (
+
     <div className="flex flex-col bg-neutral-300 w-screen h-screen items-center justify-center">
       <div className="flex flex-col gap-10 mb-40 items-center w-2/3">
         <h1 className={`${DMSans.className} font-bold text-black text-6xl text-center`}>Easily integrate <span className="text-engage-green">Engage</span> with your club&apos;s <span className="text-discord-purple">Discord</span></h1>

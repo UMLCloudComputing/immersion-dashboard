@@ -23,7 +23,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/yXGSw5AMBAA0LPY62glwr4HkHAC2krGZ0Z0ykLcXcTqvRJMXYHJhisq5xe14gh3L4NbcjtRm2RP8q0LkdPhwnfL5FGQ6cmJfYA5FmepwTSgszkiqiOR4Bag+30BOlJjp2QAAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSM7Qw0zNQTCwv1k1OydbNyUzSqw4uSUzO1nFOy/MvLSkoLanVyctPSdXLKtYvMzLQM7TQM1DMKs7M1C0qzSvJzE3VC4LQAE77TxVLAAAA"
    },
    "Metadata": {
     "aws:cdk:path": "amplify-immersiondashboard-node-sandbox-81f2b29af8/CDKMetadata/Default"

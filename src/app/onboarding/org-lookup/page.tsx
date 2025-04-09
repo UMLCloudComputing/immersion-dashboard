@@ -22,13 +22,13 @@ export default function OrgLookupPage() {
 
         if (!guildId) {
             console.error("No guild id provided")
-            router.replace("/onboarding/choose-server") //redirect to choose-server
+            router.push("/onboarding/choose-server") //redirect to choose-server
         }
     }
 
     const nextStep = () => {
         if (selectedOrg) {
-            router.replace(`/onboarding/verify?guild=${searchParams.get("guild")}&org=${selectedOrg.id}`)
+            router.push(`/onboarding/verify?guild=${searchParams.get("guild")}&org=${selectedOrg.id}`)
         } else {
             toaster.error({
                 title: "No organization selected",
@@ -62,7 +62,7 @@ export default function OrgLookupPage() {
     }, [])
 
     return (
-        <div className="w-screen h-screen immersion-gradient flex justify-begin items-center flex-col">
+        <div className="flex justify-begin items-center flex-col">
             <h1 className={`text-5xl text-center text-neutral-300 p-5 ${DMSans.className}`}>Choose your club</h1>
             {
                 loading ? <ProgressCircleRoot value={null} size="lg">

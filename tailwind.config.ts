@@ -13,7 +13,9 @@ const config: Config = {
         foreground: "var(--foreground)",
         "custom-cyan": "#59bcc8",
         "custom-purple": "#783192",
-        "discord-purple": "#7289da",
+        "custom-mid": "#768bf3",
+        "discord-purple": "#5865f2",
+        "engage-green": "#3ab549"
       },
     },
   },

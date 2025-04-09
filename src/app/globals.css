@@ -24,4 +24,21 @@ body {
   .immersion-gradient {
     @apply bg-gradient-to-r from-custom-purple via-discord-purple to-custom-cyan;
   }
+
+  .immersion-gradient-v {
+    @apply bg-gradient-to-b from-custom-purple via-discord-purple to-custom-cyan;
+  }
+
+  .animate-spin-once {
+  animation: spin 1500ms forwards;
+
+    @keyframes spin {
+    0% {
+      transform: rotate(0deg)
+    }
+    100% {
+      transform: rotate(360deg)
+    }
+    }
+  }
 }

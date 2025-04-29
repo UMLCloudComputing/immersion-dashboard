@@ -41,7 +41,7 @@ export const OrgSearch = ({ props }: { props: OrgSearchProps }) => {
                 <div className="flex flex-col gap-1 justify-begin w-full">
                     {suggestions.map((suggestion, index) => (
                         <button className="hover:bg-neutral-500 rounded-3xl flex flex-row items-center p-2" onClick={() => handleSuggestionClick(suggestion)} key={index} >
-                            <Image className="overflow-hidden rounded-full mr-5 border-2 border-neutral-300" src={suggestion.icon} alt="Org Icon" width={32} height={32} />
+                            <Image className="overflow-hidden rounded-full mr-5 border-2 border-neutral-300" src={suggestion.imageUrl} alt="Org Icon" width={32} height={32} />
                             <div className={`${DMSans.className} text-neutral-300`}>{suggestion.name}</div>
                         </button>
                     ))}

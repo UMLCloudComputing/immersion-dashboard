@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <link rel="icon" href="immersion_logo_g.svg" type="img/svg+xml"></link>
-      <body className="bg-neutral-300">
+      <body className="bg-neutral-300" suppressHydrationWarning>
         <Provider>
           <SessionProvider>
             <NavBar />

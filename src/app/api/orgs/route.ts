@@ -1,38 +1,50 @@
 import { NextRequest, NextResponse } from "next/server";
 import { tempOrgs } from "../../../data/testOrgs"
 import { DynamoDBClient, ScanCommand, ScanCommandOutput, ScanCommandInput } from "@aws-sdk/client-dynamodb"
-import { CloudFormationClient, DescribeStackResourceCommand } from "@aws-sdk/client-cloudformation";
+import { CloudFormationClient, CloudFormationServiceException, DescribeStackResourceCommand, DescribeStackResourceOutput, ListStackResourcesCommand, ListStackResourcesOutput, StackResourceSummary } from "@aws-sdk/client-cloudformation";
 import { fromIni } from "@aws-sdk/credential-provider-ini";
+import { GiConsoleController } from "react-icons/gi";
 
 const createDynamoDBScanCommand = (tableName: string): ScanCommand => {
     return new ScanCommand({
-        TableName: "", // TODO: add correct table name
+        TableName: tableName,
     })
 }
 
-const createDescribeStackResourceCommand = (resourceId: string): DescribeStackResourceCommand => {
-    return new DescribeStackResourceCommand({
-        StackName: "ImmersionStack",
-        LogicalResourceId: resourceId
+const createListResourcesCommand = (): ListStackResourcesCommand => {
+    return new ListStackResourcesCommand({
+        StackName: "ImmersionStack"
     })
 }
 
 export async function GET(req: NextRequest) {
-    const ddbClient = new DynamoDBClient({ region: "us-east-1" })
+    const ddbClient = new DynamoDBClient({
+        region: "us-east-1",
+        credentials: fromIni({ profile: "dev" })
+    })
     const cfClient = new CloudFormationClient({
         region: "us-east-1",
         credentials: fromIni({ profile: "dev" })
     })
 
-    const table = await cfClient.send(createDescribeStackResourceCommand("ImmersionOrganizationTable"))
-    console.log(table)
-    if (!table) {
-        return NextResponse.json({ message: "Could not find DDB table" }, { status: 500 })
+    let stackResources: ListStackResourcesOutput = null
+    try {
+        stackResources = await cfClient.send(createListResourcesCommand())
+    } catch (_e) {
+        const error: CloudFormationServiceException = _e;
+        return NextResponse.json({ message: "An error occured on the server " + error.message + " Please try again later" }, { status: 500 })
     }
-    const tableName = table.StackResourceDetail.PhysicalResourceId
-    const data: ScanCommandOutput = await ddbClient.send(createDynamoDBScanCommand(tableName))
-    console.log(data)
-    //const data = tempOrgs
+
+    const tableName: StackResourceSummary[] = stackResources.StackResourceSummaries
+    const table: StackResourceSummary = tableName.find((summary: StackResourceSummary) => summary.LogicalResourceId.includes("ImmersionOrganizationTable"))
+
+    let data: ScanCommandOutput = null;
+    try {
+        data = await ddbClient.send(createDynamoDBScanCommand(table.PhysicalResourceId))
+    } catch (_e) {
+        const error: CloudFormationServiceException = _e;
+        return NextResponse.json({ message: "An error occured on the server " + error.message + " Please try again later" }, { status: 500 })
+    }
     if (!data) {
         return NextResponse.json({ message: "Error fetching orgs. Try again later" }, { status: 500 })
     }

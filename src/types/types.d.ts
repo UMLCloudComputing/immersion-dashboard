@@ -14,10 +14,11 @@ export interface Guild {
 }
 
 export interface Org {
-    id: string,
+    organizationId: string,
     name: string,
-    icon: string,
-    primaryContactEmail: string
+    imageUrl: string,
+    primaryContact: string,
+    websiteKey: string
 }
 
 export interface VerificationEmailActionResponse {
@@ -29,6 +30,16 @@ export interface VerificationEmailActionResponse {
 export interface FetchError {
     message: string;
 }
+
+export interface DDBOrgItem {
+    imageUrl: { S: string };
+    name: { S: string };
+    id: { N: number };
+    primaryContact: { S: string };
+    websiteKey: { S: string };
+}
+
+
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

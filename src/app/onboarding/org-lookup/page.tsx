@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { ProgressCircleRoot, ProgressCircleRing } from "@/components/ui/progress-circle";
 import { FetchError } from "@/types/types";
 import { toaster } from "@/components/ui/toaster";
+import { ddbOrgItemToRawJSON } from "@/components/utils/utils";
+import { dataListAnatomy } from "@chakra-ui/react/anatomy";
 
 export default function OrgLookupPage() {
     const searchParams = useSearchParams()
@@ -28,7 +30,8 @@ export default function OrgLookupPage() {
 
     const nextStep = () => {
         if (selectedOrg) {
-            router.push(`/onboarding/verify?guild=${searchParams.get("guild")}&org=${selectedOrg.id}`)
+            console.log(selectedOrg.organizationId)
+            router.push(`/onboarding/verify?guild=${searchParams.get("guild")}&org=${selectedOrg.organizationId}`)
         } else {
             toaster.error({
                 title: "No organization selected",
@@ -51,12 +54,16 @@ export default function OrgLookupPage() {
                 toaster.error({
                     title: data.message,
                     description: data.message,
-                    duration: 4000
+                    duration: 15000
                 })
             }
-            setOrgs(data)
+            console.log(data.Items)
+            const unmarshalledItems = ddbOrgItemToRawJSON(data.Items)
+            setOrgs(unmarshalledItems as Org[])
             setLoading(false)
         }
+
+
 
         fetchOrgs()
     }, [])

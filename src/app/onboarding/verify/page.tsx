@@ -2,14 +2,15 @@
 import { VerificationProcessCard } from "@/components/VerificationProcessCard"
 import { tempOrgs } from "@/data/testOrgs"
 import { DMSans } from "@/fonts"
-import { Org, VerificationEmailActionResponse } from "@/types/types"
+import { DDBOrgItem, Org, VerificationEmailActionResponse } from "@/types/types"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useEffect, useState, Suspense, useActionState } from "react"
+import { useEffect, useState, Suspense, useActionState, SetStateAction } from "react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { confirmVerificationCode, sendVerificationEmail } from "@/app/actions"
 import { PinInput } from "@/components/ui/pin-input"
 import { toaster } from "@/components/ui/toaster"
+import { ddbOrgItemToRawJSON } from "@/components/utils/utils"
 
 export default function VerificationPage() {
     //hooks
@@ -32,7 +33,7 @@ export default function VerificationPage() {
         //router.replace("/onboarding/confirm")
         setFormStage(1)
         // console.log("org: ", org)
-        const res = sendVerificationEmail(org.primaryContactEmail)
+        const res = sendVerificationEmail(org.primaryContact)
         console.log(res)
         toaster.promise(res, {
             success: {
@@ -54,7 +55,7 @@ export default function VerificationPage() {
     //use effects
     useEffect(() => {
         const verifyQueryParams = () => {
-            if (!guildId) {
+            if (!guildId || guildId == undefined) {
                 console.error("No guild id provided")
                 router.push("/choose-server") //redirect to choose-server
             } else if (!orgId) {
@@ -72,20 +73,35 @@ export default function VerificationPage() {
     }
 
     useEffect(() => {
-        const getOrgByID = (orgId: string) => {
-            const org = tempOrgs.find(org => org.id === orgId)
-            if (!org) {
-                return null
-            }
-            return org
+
+        const fetchOrgs = async (): Promise<Org[]> => {
+            const res = await fetch(`/api/orgs`)
+            const ddbOutput = await res.json()
+            return ddbOutput.Items
         }
 
-        if (orgId) {
-            // delay(2000).then(() => {
-            //     setOrg(getOrgByID(orgId))
-            // })
-            setOrg(getOrgByID(orgId))
+        const getOrgByID = async (orgId: string) => {
+            const orgs = await fetchOrgs()
+            console.log(orgs)
+            const org = orgs.find(org => org.organizationId === orgId)
+            if (!org) {
+                console.log("man")
+                return null
+            }
+            console.log(org)
+            setOrg(org)
         }
+
+        getOrgByID(orgId)
+
+        // if (orgId) {
+        //     // delay(2000).then(() => {
+        //     //     setOrg(getOrgByID(orgId))
+        //     // })
+        //     console.log(orgId)
+        //     const org
+        //     setOrg(getOrgByID(orgId))
+        // }
     }, [orgId])
 
     return (
@@ -114,7 +130,7 @@ export default function VerificationPage() {
                     </Suspense>
                     <h3 className={`text-2xl text-center text-red-500 pt-10 pb-3 ${DMSans.className}`}>
                         Check this box to confirm you have access to the email <span className="font-bold text-neutral-200">
-                            {org?.primaryContactEmail}
+                            {org?.primaryContact}
                         </span>
                     </h3>
                     <Checkbox variant={"subtle"} size="lg"

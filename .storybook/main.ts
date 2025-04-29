@@ -13,7 +13,7 @@ const config: StorybookConfig = {
   ],
   "framework": {
     "name": "@storybook/experimental-nextjs-vite",
-    "options": {}
+    options: {}
   },
   "staticDirs": [
     "../public"
